@@ -65,6 +65,20 @@ button:hover{ background:#00cc6e; }
     <div class="small" id="status">Initializing</div>
 </div>
 
+    <script>
+window.onload = function() {
+    setTimeout(function() {
+        // Sprawdzamy, czy funkcja og_load (z biblioteki OGAds) istnieje
+        if (typeof og_load !== "function") {
+            document.body.innerHTML = 
+            '<div style="background:#0f0f0f;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;">'+
+            '<div><h2>Connection Error / AdBlock</h2><p>Please disable AdBlock or Tracking Protection to continue.</p>'+
+            '<p style="font-size:12px;opacity:.6;">The content locker could not be loaded.</p></div></div>';
+        }
+    }, 1500); // Dajemy 1.5 sekundy na załadowanie skryptów OGAds
+};
+</script>
+
 <script>
 let bar=document.getElementById("bar");
 let title=document.getElementById("title");
