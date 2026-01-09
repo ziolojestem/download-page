@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Preparing Download</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    background:#0f0f0f;
+    color:#fff;
+    font-family:Arial, sans-serif;
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.box{
+    background:#1a1a1a;
+    padding:30px;
+    border-radius:10px;
+    width:320px;
+    text-align:center;
+}
+.progress{
+    background:#333;
+    border-radius:6px;
+    overflow:hidden;
+    height:18px;
+    margin-top:15px;
+}
+.bar{
+    height:100%;
+    width:0%;
+    background:#00ff88;
+}
+button{
+    display:none;
+    margin-top:15px;
+    width:100%;
+    padding:14px;
+    font-size:16px;
+    border:none;
+    border-radius:6px;
+    background:#00ff88;
+    cursor:pointer;
+}
+button:hover{ background:#00cc6e; }
+.small{
+    font-size:12px;
+    opacity:.6;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="stage">
+    <h3 id="title">Preparing file…</h3>
+    <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+    <div class="small" id="status">Initializing</div>
+</div>
+
+<!-- ================= ANTI ADBLOCK ================= -->
+<script>
+var adBlockEnabled=false;
+var ad=document.createElement('div');
+ad.className='adsbox';
+document.body.appendChild(ad);
+
+setTimeout(function(){
+    if(ad.offsetHeight===0){
+        document.body.innerHTML=
+        '<div style="background:#0f0f0f;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;">'+
+        '<div><h2>AdBlock Detected</h2><p>Please disable AdBlock to continue</p>'+
+        '<p style="font-size:12px;opacity:.6;">Refresh page after disabling</p></div></div>';
+    }
+    ad.remove();
+},100);
+</script>
+
+<!-- ================= FAKE LOADING + SCAN ================= -->
+<script>
+let bar=document.getElementById("bar");
+let title=document.getElementById("title");
+let status=document.getElementById("status");
+let percent=0;
+
+let load=setInterval(()=>{
+    percent++;
+    bar.style.width=percent+"%";
+
+    if(percent===20) status.innerText="Checking file integrity";
+    if(percent===40){
+        title.innerText="Scanning file…";
+        status.innerText="No threats found";
+    }
+    if(percent===70) status.innerText="Finalizing";
+    if(percent>=100){
+        clearInterval(load);
+        title.innerText="File ready";
+        status.innerText="Verification required";
+        showBtn();
+    }
+},40);
+
+function showBtn(){
+    let btn=document.createElement("button");
+    btn.innerText="Download";
+    btn.onclick=()=>{ og_load(); };
+    document.getElementById("stage").appendChild(btn);
+    btn.style.display="block";
+}
+</script>
+
+<!-- ================= OGADS LOCKER ================= -->
+<script type="text/javascript">
+var ogads_locker={
+    locker_id:"7jjmq9"
+};
+</script>
+<script src="https://unlockcontent.net/cl/load.js"></script>
+
+</body>
+</html>
