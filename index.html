@@ -66,22 +66,7 @@ button:hover{ background:#00cc6e; }
 </div>
 
 <!-- ================= ANTI ADBLOCK ================= -->
-<script>
-var adBlockEnabled=true;
-var ad=document.createElement('div');
-ad.className='adsbox';
-document.body.appendChild(ad);
 
-setTimeout(function(){
-    if(ad.offsetHeight===0){
-        document.body.innerHTML=
-        '<div style="background:#0f0f0f;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;">'+
-        '<div><h2>AdBlock Detected</h2><p>Please disable AdBlock to continue</p>'+
-        '<p style="font-size:12px;opacity:.6;">Refresh page after disabling</p></div></div>';
-    }
-    ad.remove();
-},100);
-</script>
 
 <!-- ================= FAKE LOADING + SCAN ================= -->
 <script>
