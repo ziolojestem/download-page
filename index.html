@@ -65,27 +65,6 @@ button:hover{ background:#00cc6e; }
     <div class="small" id="status">Initializing</div>
 </div>
 
-<!-- ================= ANTI ADBLOCK ================= -->
-<script>
-var adBlockEnabled=true;
-var ad=document.createElement('div');
-ad.className='adsbox';
-ad.style.height='1px';
-ad.style.width='1px';
-ad.style.position='absolute';
-ad.style.left='-1000px';
-ad.innerHTML = "&nbsp;";
-document.body.appendChild(ad);
-
-setTimeout(function(){
-    if(ad.offsetHeight===0){
-        alert("AdBlock detected");
-    }
-    ad.remove();
-},100);
-</script>
-
-
 <script>
 let bar=document.getElementById("bar");
 let title=document.getElementById("title");
