@@ -1,79 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Preparing Download</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { background:#0f0f0f; color:#fff; font-family:Arial, sans-serif; margin:0; height:100vh; display:flex; justify-content:center; align-items:center; }
-        .box { background:#1a1a1a; padding:30px; border-radius:10px; width:320px; text-align:center; }
-        .progress { background:#333; border-radius:6px; overflow:hidden; height:18px; margin-top:15px; }
-        .bar { height:100%; width:0%; background:#00ff88; transition: width 0.1s; }
-        button { margin-top:15px; width:100%; padding:14px; font-size:16px; border:none; border-radius:6px; background:#00ff88; cursor:pointer; color:#000; font-weight:bold; }
-        button:hover { background:#00cc6e; }
-        .small { font-size:12px; opacity:.6; margin-top:10px; }
-        #btn-container { min-height: 50px; }
-    </style>
+<meta charset="UTF-8">
+<title>Files Ready</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body { background:#0f0f0f; color:#fff; font-family:sans-serif; margin:0; height:100vh; display:flex; align-items:center; justify-content:center; }
+    .card { background:#1a1a1a; padding:40px; border-radius:15px; width:300px; text-align:center; border: 1px solid #333; }
+    .progress-bg { background:#333; height:12px; border-radius:10px; margin:20px 0; overflow:hidden; }
+    .progress-fill { background:#00ff88; width:0%; height:100%; transition: width 0.2s; }
+    button { background:#00ff88; color:#000; border:none; padding:15px; width:100%; border-radius:8px; font-weight:bold; cursor:pointer; display:none; }
+    .status-text { font-size:12px; color: #888; }
+</style>
 </head>
 <body>
 
-<div class="box" id="main-container">
-    <h3 id="title">Preparing file…</h3>
-    <div class="progress">
-        <div class="bar" id="bar"></div>
-    </div>
-    <div class="small" id="status">Initializing...</div>
-    <div id="btn-container"></div>
+<div class="card">
+    <h2 id="msg">Processing...</h2>
+    <div class="progress-bg"><div class="progress-fill" id="fill"></div></div>
+    <p class="status-text" id="status">Connecting...</p>
+    <button id="dl-btn" onclick="startLocker()">DOWNLOAD NOW</button>
 </div>
 
 <script type="text/javascript">
-    // Konfiguracja OGAds - musi być nad skryptem load.js
     var ogads_locker = { locker_id: "7jjmq9" };
-
-    let bar = document.getElementById("bar");
-    let title = document.getElementById("title");
-    let status = document.getElementById("status");
-    let btnContainer = document.getElementById("btn-container");
-    let percent = 0;
-
-    let load = setInterval(() => {
-        percent++;
-        bar.style.width = percent + "%";
-
-        if (percent === 20) status.innerText = "Checking file integrity";
-        if (percent === 40) {
-            title.innerText = "Scanning file…";
-            status.innerText = "No threats found";
+    
+    function startLocker() {
+        if (typeof og_load === "function") {
+            og_load();
+        } else {
+            alert("Blocked by Browser! Please disable AdBlock/Tracking Protection and refresh.");
         }
-        if (percent === 70) status.innerText = "Finalizing";
-        if (percent >= 100) {
-            clearInterval(load);
-            title.innerText = "File ready";
-            status.innerText = "Verification required";
-            showBtn();
-        }
-    }, 40);
-
-    function showBtn() {
-        // Sprawdzenie czy przycisk już nie istnieje
-        if (document.getElementById("download-btn")) return;
-
-        let btn = document.createElement("button");
-        btn.id = "download-btn";
-        btn.innerText = "Download Now";
-        
-        btn.onclick = function() {
-            if (typeof og_load === "function") {
-                og_load();
-            } else {
-                alert("Connection error: Please disable AdBlock/Tracking Protection and refresh the page.");
-                // Opcjonalnie przeładuj stronę:
-                // window.location.reload();
-            }
-        };
-        
-        btnContainer.appendChild(btn);
     }
+
+    // Prosta animacja paska
+    let p = 0;
+    let interval = setInterval(() => {
+        p += 2;
+        document.getElementById('fill').style.width = p + '%';
+        if(p == 40) document.getElementById('status').innerText = "Checking integrity...";
+        if(p == 80) document.getElementById('status').innerText = "Finalizing...";
+        if(p >= 100) {
+            clearInterval(interval);
+            document.getElementById('msg').innerText = "File Ready";
+            document.getElementById('status').style.display = "none";
+            document.getElementById('dl-btn').style.display = "block";
+        }
+    }, 50);
 </script>
 
 <script src="https://unlockcontent.net/cl/load.js"></script>
