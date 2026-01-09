@@ -1,55 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Files Ready</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    body { background:#0f0f0f; color:#fff; font-family:sans-serif; margin:0; height:100vh; display:flex; align-items:center; justify-content:center; }
-    .card { background:#1a1a1a; padding:40px; border-radius:15px; width:300px; text-align:center; border: 1px solid #333; }
-    .progress-bg { background:#333; height:12px; border-radius:10px; margin:20px 0; overflow:hidden; }
-    .progress-fill { background:#00ff88; width:0%; height:100%; transition: width 0.2s; }
-    button { background:#00ff88; color:#000; border:none; padding:15px; width:100%; border-radius:8px; font-weight:bold; cursor:pointer; display:none; }
-    .status-text { font-size:12px; color: #888; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pobieranie pliku</title>
+    <style>
+        body { background: #0f0f0f; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { background: #1a1a1a; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #333; width: 300px; }
+        button { background: #00ff88; color: #000; border: none; padding: 15px 25px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; font-size: 16px; }
+        button:hover { background: #00cc6e; }
+    </style>
 </head>
 <body>
 
-<div class="card">
-    <h2 id="msg">Processing...</h2>
-    <div class="progress-bg"><div class="progress-fill" id="fill"></div></div>
-    <p class="status-text" id="status">Connecting...</p>
-    <button id="dl-btn" onclick="startLocker()">DOWNLOAD NOW</button>
-</div>
+    <div class="card">
+        <h2>Plik gotowy!</h2>
+        <p style="color: #888; font-size: 14px;">Kliknij przycisk, aby przejść weryfikację i pobrać plik.</p>
+        <button onclick="startDownload()">POBIERZ TERAZ</button>
+    </div>
 
-<script type="text/javascript">
-    var ogads_locker = { locker_id: "7jjmq9" };
-    
-    function startLocker() {
-        if (typeof og_load === "function") {
-            og_load();
-        } else {
-            alert("Blocked by Browser! Please disable AdBlock/Tracking Protection and refresh.");
+    <script type="text/javascript">
+        // Twoje ID z panelu
+        var ogads_locker = { locker_id: "7jjmq9" };
+
+        function startDownload() {
+            if (typeof og_load === "function") {
+                og_load();
+            } else {
+                alert("BŁĄD: Skrypt nie został wczytany. Wyłącz AdBlocka/Ochronę w przeglądarce i odśwież stronę (F5).");
+            }
         }
-    }
+    </script>
 
-    // Prosta animacja paska
-    let p = 0;
-    let interval = setInterval(() => {
-        p += 2;
-        document.getElementById('fill').style.width = p + '%';
-        if(p == 40) document.getElementById('status').innerText = "Checking integrity...";
-        if(p == 80) document.getElementById('status').innerText = "Finalizing...";
-        if(p >= 100) {
-            clearInterval(interval);
-            document.getElementById('msg').innerText = "File Ready";
-            document.getElementById('status').style.display = "none";
-            document.getElementById('dl-btn').style.display = "block";
-        }
-    }, 50);
-</script>
-
-<script src="script.js"></script>
+    <script src="https://www.link-hosting.net/cl/load.js"></script>
 
 </body>
 </html>
