@@ -2,36 +2,37 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Pobieranie...</title>
+    <title>Pobieranie</title>
     <style>
         body { background: #0b0b0b; color: #eee; font-family: Arial; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .card { background: #161616; padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 320px; }
+        .card { background: #161616; padding: 40px; border-radius: 12px; text-align: center; width: 320px; border: 1px solid #333; }
         button { background: #00ff88; color: #000; border: none; padding: 16px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2 style="margin:0">File Ready</h2>
-    <p style="color:#888">Complete verification to download.</p>
-    <button onclick="start()">DOWNLOAD NOW</button>
+    <h2>Gotowe do pobrania</h2>
+    <p style="color:#888">Kliknij przycisk, aby zweryfikować.</p>
+    <button onclick="openLocker()">POBIERZ TERAZ</button>
 </div>
 
 <script type="text/javascript">
-    var ogads_locker = { locker_id: "7jjmq9" }; // Twoje ID
+    // Twoje unikalne ID
+    var ogads_locker = { locker_id: "7jjmq9" };
 
-    function start() {
+    function openLocker() {
+        // Jeśli standardowa metoda zawiedzie, spróbujemy przekierować do Direct Linku
         if (typeof og_load === "function") {
             og_load();
         } else {
-            // Jeśli skrypt JS jest zablokowany, podaj bezpośredni link do lockera
-            alert("Błąd połączenia! Wyłącz AdBlocka lub użyj innego urządzenia.");
-            // Opcjonalnie: window.location.href = "TUTAJ_LINK_DIRECT_Z_PANELU";
+            // TUTAJ MOŻESZ WKLEIĆ DIRECT LINK JEŚLI GO ZNAJDZIESZ W PANELU
+            alert("Błąd połączenia. Spróbuj odświeżyć stronę lub wyłączyć AdBlocka.");
         }
     }
 </script>
 
-<script src="https://www.locked3.com/cl/load.js"></script>
+<script src="https://www.ogoads.com/cl/load.js?id=7jjmq9"></script>
 
 </body>
 </html>
