@@ -67,23 +67,24 @@ button:hover{ background:#00cc6e; }
 
 <!-- ================= ANTI ADBLOCK ================= -->
 <script>
-var adBlockEnabled=false;
 var ad=document.createElement('div');
 ad.className='adsbox';
+ad.style.height='1px';
+ad.style.width='1px';
+ad.style.position='absolute';
+ad.style.left='-1000px';
+ad.innerHTML = "&nbsp;";
 document.body.appendChild(ad);
 
 setTimeout(function(){
     if(ad.offsetHeight===0){
-        document.body.innerHTML=
-        '<div style="background:#0f0f0f;color:#fff;font-family:Arial;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;">'+
-        '<div><h2>AdBlock Detected</h2><p>Please disable AdBlock to continue</p>'+
-        '<p style="font-size:12px;opacity:.6;">Refresh page after disabling</p></div></div>';
+        alert("AdBlock detected");
     }
     ad.remove();
 },100);
 </script>
 
-<!-- ================= FAKE LOADING + SCAN ================= -->
+
 <script>
 let bar=document.getElementById("bar");
 let title=document.getElementById("title");
@@ -117,7 +118,7 @@ function showBtn(){
 }
 </script>
 
-<!-- ================= OGADS LOCKER ================= -->
+
 <script type="text/javascript">
 var ogads_locker={
     locker_id:"7jjmq9"
